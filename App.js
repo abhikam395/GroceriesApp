@@ -6,6 +6,9 @@ import SplashScreen from './src/screens/SplashScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
+import LocationScreen from './src/screens/LocationScreen';
+import OnBoardScreen from './src/screens/OnBoardScreen';
+import SignInScreen from './src/screens/SignInScreen';
 
 const Stack = createStackNavigator();
 
@@ -13,13 +16,17 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName="SignIn"
         screenOptions={{
           headerShown: false,
         }}>
         <Stack.Screen name="Home" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Location" component={LocationScreen} />
+        <Stack.Screen name="OnBoard" component={OnBoardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

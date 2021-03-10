@@ -1,3 +1,4 @@
+import { Link } from '@react-navigation/native';
 import React, {Component} from 'react';
 import {
   StyleSheet,
@@ -19,7 +20,12 @@ export default class SignUpScreen extends Component {
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={PRIMARY} />
         <Image source={carretIcon} style={styles.icon} />
-        <Text style={styles.title}>SignUp</Text>
+        <Text style={styles.title}>Sign Up</Text>
+        <TextInput
+          textContentType="username"
+          placeholder="Username"
+          style={styles.inputName}
+        />
         <TextInput
           keyboardType="email-address"
           placeholder="Email"
@@ -30,11 +36,16 @@ export default class SignUpScreen extends Component {
           placeholder="Password"
           style={styles.inputPassword}
         />
+        <Text style={styles.label}>
+          By continuing you agree to our
+          <Text style={styles.link}>Terms of Serivce</Text>and
+          <Text style={styles.link}>Privacy Policy</Text>
+        </Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>SignUp</Text>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         <View style={styles.row}>
-          <Text>Don't have an account?</Text>
+          <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.signUpLabel}>Login</Text>
           </TouchableOpacity>
@@ -49,7 +60,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     padding: 20,
-    // alignItems: 'center',
   },
   icon: {
     height: 70,
@@ -61,12 +71,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginTop: 80,
+    marginTop: 50,
     color: PRIMARY,
     alignSelf: 'center',
   },
+  inputName: {
+    marginTop: 50,
+    height: 50,
+    borderColor: PRIMARY,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+  },
   inputEmail: {
-    marginTop: 80,
+    marginTop: 20,
     height: 50,
     borderColor: PRIMARY,
     borderWidth: 1,
@@ -105,5 +122,13 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: PRIMARY,
     fontSize: 16,
+  },
+  label: {
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  link: {
+    color: PRIMARY,
+    fontWeight: 'bold',
   },
 });
