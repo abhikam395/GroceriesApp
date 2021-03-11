@@ -9,8 +9,11 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {PRIMARY, WHITE} from './../assets/commoncolors';
+import {DARKBLUE, GMAILCOLOR, PRIMARY, WHITE} from './../assets/commoncolors';
 import carretIcon from './../assets/images/carreticon.png';
+
+import FeatureIcon from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class LoginScreen extends Component {
   render() {
@@ -41,6 +44,11 @@ export default class LoginScreen extends Component {
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={styles.signUpLabel}>SignUp</Text>
           </TouchableOpacity>
+        </View>
+        <Text style={styles.labelOr}>Or</Text>
+        <View style={styles.buttons}>
+          <FeatureIcon name="facebook" style={styles.FbButton} />
+          <MaterialCommunityIcons name="gmail" style={styles.gmailButton} />
         </View>
       </SafeAreaView>
     );
@@ -108,5 +116,36 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: PRIMARY,
     fontSize: 16,
+  },
+  buttons: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  gmailButton: {
+    color: WHITE,
+    fontSize: 18,
+    height: 60,
+    width: 60,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: GMAILCOLOR,
+    borderRadius: 30,
+  },
+  FbButton: {
+    marginRight: 30,
+    color: WHITE,
+    fontSize: 18,
+    height: 60,
+    width: 60,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: DARKBLUE,
+    borderRadius: 30,
+  },
+  labelOr: {
+    alignSelf: 'center',
+    marginTop: 5,
+    color: PRIMARY,
   },
 });

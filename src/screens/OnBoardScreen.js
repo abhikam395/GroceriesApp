@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { PRIMARY, WHITE } from '../assets/commoncolors';
+import {PRIMARY, WHITE} from '../assets/commoncolors';
 import backgroundImage from './../assets/images/deliveryboy.png';
 
 export default class OnBoardScreen extends Component {
   render() {
+    let {navigation} = this.props;
     return (
       <View style={styles.container}>
         <Image source={backgroundImage} style={styles.image} />
@@ -13,7 +14,9 @@ export default class OnBoardScreen extends Component {
           <Text style={styles.subTitle}>
             Get your groceries in less than one hour
           </Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.replace('Login')}>
             <Text style={styles.buttonText}>Get Start</Text>
           </TouchableOpacity>
         </View>
@@ -54,13 +57,13 @@ const styles = StyleSheet.create({
     color: 'lightgrey',
   },
   button: {
-    height: 50,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 50,
     backgroundColor: PRIMARY,
-    width: '70%',
-    borderRadius: 20,
+    width: '80%',
+    borderRadius: 10,
   },
   buttonText: {
     color: WHITE,
