@@ -1,4 +1,4 @@
-package com.groceriesapp;
+package com.abhi.groceriesapp;
 
 import android.app.Application;
 import android.content.Context;

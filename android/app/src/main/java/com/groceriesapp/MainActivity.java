@@ -1,4 +1,4 @@
-package com.groceriesapp;
+package com.abhi.groceriesapp;
 
 import com.facebook.react.ReactActivity;
 

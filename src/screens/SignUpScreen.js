@@ -43,7 +43,9 @@ export default class SignUpScreen extends Component {
           <Text style={styles.link}>Terms of Serivce</Text>and
           <Text style={styles.link}>Privacy Policy</Text>
         </Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Home')}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         <View style={styles.row}>

@@ -92,6 +92,7 @@ export default class HomeScreen extends Component {
         tabBarOptions={{
           activeTintColor: PRIMARY,
           inactiveTintColor: 'black',
+          keyboardHidesTabBar: true,
         }}>
         <Tab.Screen name="Shop" component={ShopScreen} />
         <Tab.Screen name="Explore" component={ExploreScreen} />
