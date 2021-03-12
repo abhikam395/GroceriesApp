@@ -13,6 +13,7 @@ import OffersComponent from './../../components/OffersComponent';
 import ExclusiveOffers from './../../components/ExclusiveOffers';
 import BestSelling from './../../components/BestSelling';
 import RestProducts from './../../components/RestProducts';
+import Groceries from './../../components/Groceries';
 
 export default class ShopScreen extends Component {
   render() {
@@ -27,9 +28,12 @@ export default class ShopScreen extends Component {
               <OffersComponent />
               <ExclusiveOffers navigation={this.props.navigation} />
               <BestSelling navigation={this.props.navigation} />
+              <Groceries />
             </>
           }
-          ListEmptyComponent={<RestProducts />}
+          ListEmptyComponent={
+            <RestProducts navigation={this.props.navigation} />
+          }
         />
       </SafeAreaView>
     );

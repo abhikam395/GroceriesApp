@@ -35,14 +35,13 @@ export default class RestProduct extends Component {
     return (
       <SafeAreaView>
         <FlatList
+          horizontal
           style={styles.list}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           data={products}
           renderItem={({item}) => this.renderProduct(item)}
           keyExtractor={(item) => item.id}
-          numColumns={2}
-          columnWrapperStyle={{marginTop: 20}}
         />
       </SafeAreaView>
     );
@@ -51,6 +50,6 @@ export default class RestProduct extends Component {
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 20,
+    marginTop: 40,
   },
 });
