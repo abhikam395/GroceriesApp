@@ -22,7 +22,7 @@ export default class HomeScreen extends Component {
     return (
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({focused}) => {
             let Icon;
             switch (route.name) {
               case 'Shop': {

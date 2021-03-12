@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   searchbar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#e0e0e0',
     borderRadius: 10,
     paddingHorizontal: 15,
   },

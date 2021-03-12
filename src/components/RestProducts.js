@@ -1,14 +1,6 @@
 import React, {Component} from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
 
-import {PRIMARY} from './../assets/commoncolors';
 import ProductComponent from './ProductComponent';
 
 export default class RestProduct extends Component {

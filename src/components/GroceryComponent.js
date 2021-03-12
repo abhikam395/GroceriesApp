@@ -8,7 +8,8 @@ export default class GroceryComponent extends Component {
     let color = getRandomColor();
     let {grocery} = this.props;
     return (
-      <View style={Object.assign({}, styles.card, {backgroundColor: color})}>
+      <View
+        style={Object.assign({}, styles.card, {backgroundColor: color.light})}>
         <Image source={pulsesImage} style={styles.image} />
         <Text style={styles.title}>{grocery.name}</Text>
       </View>
