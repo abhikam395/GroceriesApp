@@ -30,7 +30,7 @@ export default class OffersComponent extends Component {
     this.setState({indicators: indicators, previousSelectedPage: position});
   }
 
-  renderProduct(product) {
+  renderDot(product) {
     let color = product.isActive ? PRIMARY : 'lightgrey';
     return (
       <View
@@ -67,7 +67,7 @@ export default class OffersComponent extends Component {
         <FlatList
           style={styles.indicators}
           data={indicators}
-          renderItem={({item}) => this.renderProduct(item)}
+          renderItem={({item}) => this.renderDot(item)}
           keyExtractor={(item) => item.id.toString()}
         />
       </View>
