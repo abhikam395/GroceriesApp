@@ -8,9 +8,11 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
+  Button,
+  ToastAndroid,
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import {PRIMARY} from '../../assets/commoncolors';
+import {PRIMARY, WHITE} from '../../assets/commoncolors';
 import AppleImage from './../../assets/images/apple.png';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -61,6 +63,15 @@ export default class ProductDetailScreen extends Component {
     this.setState({favoriteSelected: !favoriteSelected});
   }
 
+  onBackPress() {
+    let {navigation} = this.props;
+    navigation.replace('Home');
+  }
+
+  onShareClick() {
+    console.log(12);
+  }
+
   addItem() {
     let {quantity} = this.state;
     this.setState({quantity: ++quantity});
@@ -104,6 +115,15 @@ export default class ProductDetailScreen extends Component {
           keyExtractor={null}
           ListHeaderComponent={
             <View style={styles.pagerContainer}>
+              <TouchableOpacity onPress={() => this.onBackPress()}>
+                <MaterialIcons
+                  name="keyboard-arrow-left"
+                  style={styles.backIcon}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.onShareClick()}>
+                <MaterialIcons name="share" style={styles.shareIcon} />
+              </TouchableOpacity>
               <PagerView
                 style={styles.pagerView}
                 initialPage={0}
@@ -185,8 +205,23 @@ export default class ProductDetailScreen extends Component {
               <View style={styles.line} />
               <View style={styles.subComponent}>
                 <Text style={styles.subLabel}>Review</Text>
-                <AirbnbRating showRating={false}></AirbnbRating>
+                <View style={styles.rating}>
+                  <AirbnbRating
+                    showRating={false}
+                    isDisabled
+                    size={18}
+                    count={5}
+                    defaultRating={5}
+                  />
+                  <MaterialIcons
+                    name="keyboard-arrow-right"
+                    style={styles.icon}
+                  />
+                </View>
               </View>
+              <TouchableOpacity style={styles.button} activeOpacity={0.6}>
+                <Text style={styles.buttonTitle}>ADD TO BASKET</Text>
+              </TouchableOpacity>
             </View>
           }
         />
@@ -297,7 +332,32 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 1,
   },
+  backIcon: {
+    fontSize: 30,
+    top: 20,
+    left: 10,
+  },
+  shareIcon: {
+    position: 'absolute',
+    fontSize: 24,
+    right: 20,
+  },
   rating: {
     height: 20,
+    position: 'absolute',
+    right: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  button: {
+    height: 57,
+    backgroundColor: PRIMARY,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonTitle: {
+    fontWeight: '700',
+    color: WHITE,
   },
 });
