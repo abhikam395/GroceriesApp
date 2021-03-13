@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
   FlatList,
@@ -9,9 +10,9 @@ import {
   View,
 } from 'react-native';
 import {PRIMARY, WHITE} from '../../assets/commoncolors';
-import CartItemComponent from './../../components/CartItemComponent';
+import FavouriteItemComponent from '../../components/FavouriteItemComponent';
 
-export default class CartScreen extends Component {
+export default class FavouriteScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -21,81 +22,66 @@ export default class CartScreen extends Component {
           name: 'Bell Pepper Red',
           label: '1kg, Price',
           price: '4.2',
-          quantity: 1,
         },
         {
           id: 2,
           name: 'Bell Pepper Red',
           label: '1kg, Price',
           price: '4.2',
-          quantity: 1,
         },
         {
           id: 3,
           name: 'Bell Pepper Red',
           label: '1kg, Price',
           price: '4.2',
-          quantity: 1,
         },
         {
           id: 4,
           name: 'Bell Pepper Red',
           label: '1kg, Price',
           price: '4.2',
-          quantity: 1,
         },
         {
           id: 5,
           name: 'Bell Pepper Red',
           label: '1kg, Price',
           price: '4.2',
-          quantity: 1,
         },
         {
           id: 6,
           name: 'Bell Pepper Red',
           label: '1kg, Price',
           price: '4.2',
-          quantity: 1,
         },
-        {id: 7, name: 'Ginger', label: '1kg, Price', price: '4.2', quantity: 1},
+        {id: 7, name: 'Ginger', label: '1kg, Price', price: '4.2'},
       ],
     };
-    this.removeProduct = this.removeProduct.bind(this);
   }
 
-  removeProduct(id) {
-    let {list} = this.state;
-    this.setState({list: list.filter((item) => item.id !== id)});
-    ToastAndroid.showWithGravity('Item removed from Cart', 1, ToastAndroid.TOP);
-  }
-
-  checkout() {
-    ToastAndroid.showWithGravity('Checkout', 1, ToastAndroid.TOP);
+  addItemToCart() {
+    ToastAndroid.showWithGravity('Items Added to cart', 1, ToastAndroid.TOP);
   }
 
   render() {
     let {list} = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>My Cart</Text>
+        <Text style={styles.title}>Favourite</Text>
         <View style={styles.line} />
         <FlatList
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           style={styles.list}
           data={list}
-          renderItem={({item}) => (
-            <CartItemComponent
-              product={item}
-              removeProduct={this.removeProduct}
-            />
-          )}
+          renderItem={({item}) => <FavouriteItemComponent product={item} />}
           keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{paddingBottom: 90}}
+          contentContainerStyle={{paddingBottom: 150}}
         />
-        <TouchableOpacity style={styles.button} onPress={() => this.checkout()}>
-          <Text style={styles.buttonText}>Checkout</Text>
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={0.7}
+          onPress={() => this.addItemToCart()}>
+          <Text style={styles.buttonText}>Add All To Cart</Text>
         </TouchableOpacity>
       </SafeAreaView>
     );
@@ -104,6 +90,7 @@ export default class CartScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     alignItems: 'center',
     flex: 1,
     width: '100%',

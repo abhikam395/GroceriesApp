@@ -11,7 +11,7 @@ import {PRIMARY} from '../assets/commoncolors';
 
 import ShopScreen from './home/ShopScreen';
 import CartScreen from './home/CartScreen';
-import FavoriteScreen from './home/FavoriteScreen';
+import FavouriteScreen from './home/FavouriteScreen';
 import AccountScreen from './home/AccountScreen';
 import ExploreScreen from './home/ExploreScreen';
 
@@ -21,7 +21,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <Tab.Navigator
-        initialRouteName="Cart"
+        initialRouteName="Favourite"
         screenOptions={({route}) => ({
           tabBarIcon: ({focused}) => {
             let Icon;
@@ -59,7 +59,7 @@ export default class HomeScreen extends Component {
                 );
                 return Icon;
               }
-              case 'Favorite': {
+              case 'Favourite': {
                 Icon = focused ? (
                   <MaterialIcon
                     name="favorite"
@@ -98,7 +98,7 @@ export default class HomeScreen extends Component {
         <Tab.Screen name="Shop" component={ShopScreen} />
         <Tab.Screen name="Explore" component={ExploreScreen} />
         <Tab.Screen name="Cart" component={CartScreen} />
-        <Tab.Screen name="Favorite" component={FavoriteScreen} />
+        <Tab.Screen name="Favourite" component={FavouriteScreen} />
         <Tab.Screen name="Account" component={AccountScreen} />
       </Tab.Navigator>
     );
