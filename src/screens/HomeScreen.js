@@ -21,6 +21,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <Tab.Navigator
+        initialRouteName="Cart"
         screenOptions={({route}) => ({
           tabBarIcon: ({focused}) => {
             let Icon;
