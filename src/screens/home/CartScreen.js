@@ -1,14 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
   FlatList,
   SafeAreaView,
   StyleSheet,
   Text,
-  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {PRIMARY, WHITE} from '../../assets/commoncolors';
+import { ACTIONS } from '../../utils/cartActions';
+import OrderAcceptScreen from '../OrderAcceptScreen';
 import CartItemComponent from './../../components/CartItemComponent';
 
 import CheckoutScreen from './../CheckOutScreen';
@@ -62,9 +64,10 @@ export default class CartScreen extends Component {
         },
         {id: 7, name: 'Ginger', label: '1kg, Price', price: '4.2', quantity: 1},
       ],
-      checkout: false,
+      actionType: null,
     };
     this.removeProduct = this.removeProduct.bind(this);
+    this.changeAction = this.changeAction.bind(this);
   }
 
   removeProduct(id) {
@@ -74,7 +77,11 @@ export default class CartScreen extends Component {
   }
 
   checkout() {
-    this.setState({checkout: true});
+    this.setState({actionType: ACTIONS.CHECKOUT});
+  }
+
+  changeAction(action) {
+    this.setState({actionType: action});
   }
 
   /**
@@ -86,7 +93,7 @@ export default class CartScreen extends Component {
   }
 
   render() {
-    let {list, checkout} = this.state;
+    let {list, actionType} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
@@ -111,12 +118,15 @@ export default class CartScreen extends Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() => this.checkout()}>
-              <Text style={styles.buttonText}>Checkout</Text>
+              <Text style={styles.buttonText}>CHECKOUT</Text>
             </TouchableOpacity>
           )}
         </View>
-        {checkout && (
-          <CheckoutScreen hide={() => this.hideCheckoutComponent()} />
+        {actionType === ACTIONS.CHECKOUT && (
+          <CheckoutScreen changeAction={this.changeAction} />
+        )}
+        {actionType === ACTIONS.ORDERACCEPTED && (
+          <OrderAcceptScreen changeAction={this.changeAction} />
         )}
       </SafeAreaView>
     );

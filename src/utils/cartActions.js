@@ -1,0 +1,4 @@
+export const ACTIONS = {
+  CHECKOUT: 'CHECKOUT',
+  ORDERACCEPTED: 'ORDERACCEPTED',
+};

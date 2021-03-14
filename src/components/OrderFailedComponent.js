@@ -18,19 +18,19 @@ export default class OrderFailedComponent extends Component {
         <View style={styles.contentContainer}>
           <TouchableOpacity
             style={styles.clearButton}
-            onPress={() => this.props.hideError()}>
+            onPress={() => this.props.navigateToHome()}>
             <MaterialIcons name="clear" style={styles.clearIcon} />
           </TouchableOpacity>
           <Image source={icon} style={styles.icon} />
           <Text style={styles.error}>Oops! Something when wrong</Text>
           <TouchableOpacity
             style={styles.tryAgainButton}
-            onPress={() => this.props.hideError()}>
+            onPress={() => this.props.navigateToHome()}>
             <Text style={styles.tryAgainButtonLabel}>Please try again</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.backHomButton}
-            onPress={() => this.props.hideError()}>
+            onPress={() => this.props.navigateToHome()}>
             <Text style={styles.backButtonLabel}>Back to home</Text>
           </TouchableOpacity>
         </View>

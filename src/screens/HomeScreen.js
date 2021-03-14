@@ -8,7 +8,7 @@ export default class HomeScreen extends Component {
   constructor() {
     super();
     this.state = {
-      error: true,
+      error: false,
     };
   }
 
@@ -22,7 +22,7 @@ export default class HomeScreen extends Component {
       <SafeAreaView style={styles.container}>
         <Navigator />
         {error && (
-          <OrderFailedComponent hideError={() => this.hideErrorScreen()} />
+          <OrderFailedComponent navigateToHome={() => this.hideErrorScreen()} />
         )}
       </SafeAreaView>
     );

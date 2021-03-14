@@ -9,19 +9,24 @@ export default class ExploreScreen extends Component {
     super();
     this.state = {
       categories: [
-        {id: 1, name: 'Frash Fruits \n& Vegetable'},
-        {id: 2, name: 'Cooking Oil \n& Ghee'},
+        {id: 1, name: 'Frash Fruits & Vegetable'},
+        {id: 2, name: 'Cooking Oil & Ghee'},
         {id: 3, name: 'Meat & Fish'},
         {id: 4, name: 'Bakery & Snacks'},
         {id: 5, name: 'Dairy & Eggs'},
         {id: 6, name: 'Beverages'},
-        {id: 7, name: 'Frash Fruits \n& Vegetable'},
+        {id: 7, name: 'Frash Fruits & Vegetable'},
       ],
     };
   }
 
   renderCategory(category) {
-    return <CategoryComponent category={category} />;
+    return (
+      <CategoryComponent
+        category={category}
+        navigation={this.props.navigation}
+      />
+    );
   }
 
   render() {

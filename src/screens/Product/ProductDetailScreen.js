@@ -8,15 +8,13 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  Button,
-  ToastAndroid,
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {PRIMARY, WHITE} from '../../assets/commoncolors';
 import AppleImage from './../../assets/images/apple.png';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Rating, AirbnbRating} from 'react-native-ratings';
+import {AirbnbRating} from 'react-native-ratings';
 
 export default class ProductDetailScreen extends Component {
   constructor() {
@@ -115,7 +113,9 @@ export default class ProductDetailScreen extends Component {
           keyExtractor={null}
           ListHeaderComponent={
             <View style={styles.pagerContainer}>
-              <TouchableOpacity onPress={() => this.onBackPress()}>
+              <TouchableOpacity
+                onPress={() => this.onBackPress()}
+                style={{zIndex: 10, paddingHorizontal: 5}}>
                 <MaterialIcons
                   name="keyboard-arrow-left"
                   style={styles.backIcon}

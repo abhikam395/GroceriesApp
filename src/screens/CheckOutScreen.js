@@ -15,7 +15,9 @@ import DeliveryItem from './../components/Checkout/CheckoutDeliveryItem';
 import PayoutMethodItem from './../components/Checkout/CheckoutPaymentMethod';
 import PromoCodeItem from './../components/Checkout/CheckoutPromoCodeItem';
 import TotalCostItem from './../components/Checkout/CheckoutTotalCostItem';
+import OrderAcceptScreen from './OrderAcceptScreen';
 import {PRIMARY, WHITE} from '../assets/commoncolors';
+import { ACTIONS } from '../utils/cartActions';
 
 export default class CheckOutScreen extends Component {
   constructor() {
@@ -30,8 +32,7 @@ export default class CheckOutScreen extends Component {
   }
 
   orderPlace() {
-    ToastAndroid.show('Order Placed', 1);
-    this.props.hide();
+    this.props.changeAction(ACTIONS.ORDERACCEPTED);
   }
 
   render() {
@@ -44,7 +45,7 @@ export default class CheckOutScreen extends Component {
               <MaterialIcons
                 name="clear"
                 style={styles.clearIcon}
-                onPress={() => this.props.hide()}
+                onPress={() => this.props.changeAction(null)}
               />
             </TouchableOpacity>
             <Text style={styles.title}>Checkout</Text>

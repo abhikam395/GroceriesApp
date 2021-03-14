@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import rendomColorPicker from './../utils/rendomColorPicker';
 import meatImage from './../assets/images/chicken.png';
 
 export default class CategoryComponent extends Component {
   render() {
     let color = rendomColorPicker();
-    let {category} = this.props;
+    let {category, navigation} = this.props;
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Products', {title: category.name})}
         style={Object.assign({}, styles.card, {
           backgroundColor: color.light,
           borderColor: color.dark,
         })}>
         <Image source={meatImage} style={styles.image} />
         <Text style={styles.name}>{category.name}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -39,5 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     alignSelf: 'center',
+    textAlign: 'center',
+    width: '80%',
   },
 });

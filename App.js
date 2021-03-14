@@ -10,6 +10,7 @@ import LocationScreen from './src/screens/LocationScreen';
 import OnBoardScreen from './src/screens/OnBoardScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import ProductDetailScreen from './src/screens/Product/ProductDetailScreen';
+import ProductsScreen from './src/screens/ProductsScreen';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ function App() {
         <Stack.Screen name="OnBoard" component={OnBoardScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="Products" component={ProductsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

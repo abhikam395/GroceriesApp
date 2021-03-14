@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     marginRight: 10,
+    flex: 1,
+    width: '100%',
   },
   image: {
     height: 120,
