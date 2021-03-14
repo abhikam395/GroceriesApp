@@ -14,6 +14,12 @@ target 'GroceriesApp' do
 
   pod 'react-native-pager-view', :path => '../node_modules/react-native-pager-view'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
+  pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'
+
   target 'GroceriesAppTests' do
     inherit! :complete
     # Pods for testing

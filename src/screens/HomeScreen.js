@@ -1,115 +1,38 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {SafeAreaView, StyleSheet} from 'react-native';
 
-import {PRIMARY} from '../assets/commoncolors';
-
-import ShopScreen from './home/ShopScreen';
-import CartScreen from './home/CartScreen';
-import FavouriteScreen from './home/FavouriteScreen';
-import AccountScreen from './home/AccountScreen';
-import ExploreScreen from './home/ExploreScreen';
-
-const Tab = createBottomTabNavigator();
+import Navigator from './../components/HomeNavigatorComponent';
+import OrderFailedComponent from '../components/OrderFailedComponent';
 
 export default class HomeScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      error: true,
+    };
+  }
+
+  hideErrorScreen() {
+    this.setState({error: false});
+  }
+
   render() {
+    let {error} = this.state;
     return (
-      <Tab.Navigator
-        initialRouteName="Favourite"
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused}) => {
-            let Icon;
-            switch (route.name) {
-              case 'Shop': {
-                Icon = focused ? (
-                  <EntypoIcon
-                    name="shop"
-                    style={Object.assign({}, styles.icon, {color: PRIMARY})}
-                  />
-                ) : (
-                  <EntypoIcon name="shop" style={styles.icon} />
-                );
-                return Icon;
-              }
-              case 'Explore': {
-                Icon = focused ? (
-                  <FontAwesome
-                    name="search"
-                    style={Object.assign({}, styles.icon, {color: PRIMARY})}
-                  />
-                ) : (
-                  <FontAwesome name="search" style={styles.icon} />
-                );
-                return Icon;
-              }
-              case 'Cart': {
-                Icon = focused ? (
-                  <AntDesignIcon
-                    name="shoppingcart"
-                    style={Object.assign({}, styles.icon, {color: PRIMARY})}
-                  />
-                ) : (
-                  <AntDesignIcon name="shoppingcart" style={styles.icon} />
-                );
-                return Icon;
-              }
-              case 'Favourite': {
-                Icon = focused ? (
-                  <MaterialIcon
-                    name="favorite"
-                    style={Object.assign({}, styles.icon, {color: PRIMARY})}
-                  />
-                ) : (
-                  <MaterialIcon name="favorite" style={styles.icon} />
-                );
-                return Icon;
-              }
-              case 'Account': {
-                Icon = focused ? (
-                  <MaterialCommunityIcon
-                    name="account"
-                    style={Object.assign({}, styles.icon, {color: PRIMARY})}
-                  />
-                ) : (
-                  <MaterialCommunityIcon name="account" style={styles.icon} />
-                );
-                return Icon;
-              }
-            }
-            return (
-              <EntypoIcon
-                name="shop"
-                style={Object.assign({}, styles.icon, {color: PRIMARY})}
-              />
-            );
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: PRIMARY,
-          inactiveTintColor: 'black',
-          keyboardHidesTabBar: true,
-        }}>
-        <Tab.Screen name="Shop" component={ShopScreen} />
-        <Tab.Screen name="Explore" component={ExploreScreen} />
-        <Tab.Screen name="Cart" component={CartScreen} />
-        <Tab.Screen name="Favourite" component={FavouriteScreen} />
-        <Tab.Screen name="Account" component={AccountScreen} />
-      </Tab.Navigator>
+      <SafeAreaView style={styles.container}>
+        <Navigator />
+        {error && (
+          <OrderFailedComponent hideError={() => this.hideErrorScreen()} />
+        )}
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    fontSize: 16,
-  },
-  active: {
-    color: PRIMARY,
+  container: {
+    height: '100%',
+    zIndex: 1,
+    position: 'relative',
   },
 });

@@ -11,6 +11,8 @@ import {
 import {PRIMARY, WHITE} from '../../assets/commoncolors';
 import CartItemComponent from './../../components/CartItemComponent';
 
+import CheckoutScreen from './../CheckOutScreen';
+
 export default class CartScreen extends Component {
   constructor() {
     super();
@@ -60,6 +62,7 @@ export default class CartScreen extends Component {
         },
         {id: 7, name: 'Ginger', label: '1kg, Price', price: '4.2', quantity: 1},
       ],
+      checkout: false,
     };
     this.removeProduct = this.removeProduct.bind(this);
   }
@@ -67,36 +70,54 @@ export default class CartScreen extends Component {
   removeProduct(id) {
     let {list} = this.state;
     this.setState({list: list.filter((item) => item.id !== id)});
-    ToastAndroid.showWithGravity('Item removed from Cart', 1, ToastAndroid.TOP);
+    // ToastAndroid.showWithGravity('Item removed from Cart', 1, ToastAndroid.TOP);
   }
 
   checkout() {
-    ToastAndroid.showWithGravity('Checkout', 1, ToastAndroid.TOP);
+    this.setState({checkout: true});
+  }
+
+  /**
+   * hide checkout compoent
+   * reset list
+   */
+  hideCheckoutComponent() {
+    this.setState({checkout: false});
   }
 
   render() {
-    let {list} = this.state;
+    let {list, checkout} = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>My Cart</Text>
-        <View style={styles.line} />
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          style={styles.list}
-          data={list}
-          renderItem={({item}) => (
-            <CartItemComponent
-              product={item}
-              removeProduct={this.removeProduct}
-            />
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>My Cart</Text>
+          <View style={styles.line} />
+          {list.length === 0 && <Text>Cart Empty</Text>}
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            style={styles.list}
+            data={list}
+            renderItem={({item}) => (
+              <CartItemComponent
+                product={item}
+                removeProduct={this.removeProduct}
+              />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={{paddingBottom: 90}}
+          />
+          {list.length !== 0 && (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.checkout()}>
+              <Text style={styles.buttonText}>Checkout</Text>
+            </TouchableOpacity>
           )}
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{paddingBottom: 90}}
-        />
-        <TouchableOpacity style={styles.button} onPress={() => this.checkout()}>
-          <Text style={styles.buttonText}>Checkout</Text>
-        </TouchableOpacity>
+        </View>
+        {checkout && (
+          <CheckoutScreen hide={() => this.hideCheckoutComponent()} />
+        )}
       </SafeAreaView>
     );
   }
@@ -104,9 +125,12 @@ export default class CartScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
+  },
+  contentContainer: {
     flex: 1,
     width: '100%',
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,
