@@ -23,13 +23,14 @@ export default class CategoryComponent extends Component {
 
 const styles = StyleSheet.create({
   card: {
-    margin: 10,
+    flex: 1,
     height: 'auto',
     borderWidth: 1,
     width: '42%',
     borderRadius: 15,
     alignItems: 'center',
     paddingVertical: 30,
+    marginRight: 20,
   },
   image: {
     resizeMode: 'contain',
