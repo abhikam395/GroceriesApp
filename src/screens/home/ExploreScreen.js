@@ -4,7 +4,6 @@ import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import SearchComponent from './../../components/SearchComponent';
 import CategoryComponent from './../../components/CategoryComponent';
 import SearchScreen from './../SearchScreen';
-
 import FilterComponent from './../../components/FilterComponent';
 
 export default class ExploreScreen extends Component {
@@ -20,7 +19,7 @@ export default class ExploreScreen extends Component {
         {id: 6, name: 'Beverages'},
         {id: 7, name: 'Frash Fruits & Vegetable'},
       ],
-      query: null,
+      query: '',
       filterOpen: false,
     };
     this.changeQuery = this.changeQuery.bind(this);
@@ -33,7 +32,6 @@ export default class ExploreScreen extends Component {
   }
 
   changeQuery(query) {
-    console.log(query);
     this.setState({query: query});
   }
 
@@ -51,7 +49,15 @@ export default class ExploreScreen extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.contentContainer}>
-          {query === null && (
+          <Text style={styles.title}>Find Products</Text>
+          <View style={styles.searchbar}>
+            <SearchComponent
+              query={query}
+              changeQuery={this.changeQuery}
+              filterToggle={this.filterToggle}
+            />
+          </View>
+          {query.length === 0 && (
             <FlatList
               nestedScrollEnabled={true}
               style={styles.list}
@@ -61,22 +67,15 @@ export default class ExploreScreen extends Component {
               renderItem={({item}) => this.renderCategory(item)}
               keyExtractor={(category) => category.id.toString()}
               numColumns={2}
-              ListHeaderComponent={
-                <>
-                  <Text style={styles.title}>Find Products</Text>
-                  <View style={styles.searchbar}>
-                    <SearchComponent
-                      changeQuery={this.changeQuery}
-                      filterToggle={this.filterToggle}
-                    />
-                  </View>
-                </>
-              }
+              contentContainerStyle={styles.contentContainerStyle}
               columnWrapperStyle={styles.columnWrapperStyle}
             />
           )}
+          {query.length !== 0 && (
+            <SearchScreen navigation={this.props.navigation} />
+          )}
+          {filterOpen && <FilterComponent filterToggle={this.filterToggle} />}
         </View>
-        {filterOpen && <FilterComponent filterToggle={this.filterToggle} />}
       </SafeAreaView>
     );
   }
@@ -102,11 +101,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   searchbar: {
-    marginBottom: 30,
+    // marginBottom: 10,
   },
   columnWrapperStyle: {
     flex: 1,
     justifyContent: 'space-between',
     marginBottom: 20,
+    alignItems: 'center',
+  },
+  contentContainerStyle: {
+    paddingBottom: 150,
+    paddingVertical: 20,
   },
 });

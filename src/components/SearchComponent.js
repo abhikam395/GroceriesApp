@@ -5,12 +5,15 @@ import Icon from 'react-native-vector-icons/Feather';
 export default class SearchComponent extends Component {
   constructor() {
     super();
-    this.state = {
-      query: null,
-    };
+    this.changeQuery = this.changeQuery.bind(this);
+  }
+
+  changeQuery(e) {
+    this.props.changeQuery(e);
   }
 
   render() {
+    let {query} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
@@ -18,14 +21,16 @@ export default class SearchComponent extends Component {
           <TextInput
             placeholder="Search Store"
             style={styles.input}
-            onKeyPress={() => this.props.changeQuery('')}
+            onChangeText={this.changeQuery}
           />
         </View>
-        <TouchableOpacity
-          style={styles.filterButton}
-          onPress={() => this.props.filterToggle()}>
-          <Icon name="filter" style={styles.icon} />
-        </TouchableOpacity>
+        {query !== undefined && query.length !== 0 && (
+          <TouchableOpacity
+            style={styles.filterButton}
+            onPress={() => this.props.filterToggle()}>
+            <Icon name="filter" style={styles.icon} />
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
@@ -35,6 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '100%',
   },
   contentContainer: {
     flex: 1,
@@ -46,6 +52,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginLeft: 10,
+    flex: 1,
   },
   icon: {
     fontSize: 18,
