@@ -1,21 +1,43 @@
 import React, {Component} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import {PRIMARY} from './../assets/commoncolors';
 
 export default class SearchComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      query: null,
+    };
+  }
+
   render() {
     return (
-      <View style={styles.searchbar}>
-        <Icon name="search" style={styles.icon} />
-        <TextInput placeholder="Search Store" style={styles.input} />
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
+          <Icon name="search" style={styles.icon} />
+          <TextInput
+            placeholder="Search Store"
+            style={styles.input}
+            onKeyPress={() => this.props.changeQuery('')}
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => this.props.filterToggle()}>
+          <Icon name="filter" style={styles.icon} />
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  searchbar: {
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#e0e0e0',
@@ -23,10 +45,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   input: {
-    width: '100%',
     marginLeft: 10,
   },
   icon: {
-    fontSize: 16,
+    fontSize: 18,
+    alignSelf: 'center',
+    zIndex: 10,
+  },
+  filterButton: {
+    margin: 'auto',
+    marginHorizontal: 20,
+    zIndex: 10,
   },
 });

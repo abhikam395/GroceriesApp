@@ -23,7 +23,8 @@ export default class FilterComponent extends Component {
         {id: 4, name: 'Fast Food', selected: false},
       ],
     };
-    this.bottomSheet = React.createRef();
+    // this.bottomSheet = React.createRef();
+    this.hide = this.hide.bind(this);
     this.onBottomSheetStateChange = this.onBottomSheetStateChange.bind(this);
   }
 
@@ -41,9 +42,13 @@ export default class FilterComponent extends Component {
     );
   }
 
-  //hide self
   onBottomSheetStateChange() {
-    this.props.toggle();
+    this.hide();
+  }
+
+  //hide self
+  hide() {
+    this.props.filterToggle();
   }
 
   render() {
@@ -72,7 +77,10 @@ export default class FilterComponent extends Component {
               renderItem={({item}) => this.renderCategoryItem(item)}
             />
           </View>
-          <TouchableOpacity style={styles.button} activeOpacity={0.6}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.6}
+            onPress={this.hide}>
             <Text style={styles.buttonText}>Apply Filter</Text>
           </TouchableOpacity>
         </BottomSheet>
