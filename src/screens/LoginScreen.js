@@ -14,8 +14,36 @@ import carretIcon from './../assets/images/carreticon.png';
 
 import FeatureIcon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import baseUrl from './../../config/baseUrl';
+// import {registerUser} from './../../apis/authApis';
 
 export default class LoginScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      email: null,
+      password: null,
+    };
+  }
+
+  componentDidMount() {
+    fetch(`${baseUrl}/products`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+      })
+      .catch((error) => console.error(error));
+  }
+
+  async login() {
+    fetch(`${baseUrl}/products`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+      })
+      .catch((error) => console.error(error));
+  }
+
   render() {
     let {navigation} = this.props;
     return (
@@ -27,18 +55,18 @@ export default class LoginScreen extends Component {
           keyboardType="email-address"
           placeholder="Email"
           style={styles.inputEmail}
+          onChangeText={(value) => this.setState({email: value})}
         />
         <TextInput
           secureTextEntry={true}
           placeholder="Password"
           style={styles.inputPassword}
+          onChangeText={(value) => this.setState({password: value})}
         />
         <TouchableOpacity>
           <Text style={styles.forgetPassword}>Forget Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.button} onPress={() => this.login()}>
           <Text style={styles.buttonText}> Login</Text>
         </TouchableOpacity>
         <View style={styles.row}>

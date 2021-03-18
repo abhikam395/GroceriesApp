@@ -4,7 +4,15 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import Navigator from './../components/HomeNavigatorComponent';
 import OrderFailedComponent from '../components/OrderFailedComponent';
 
-export default class HomeScreen extends Component {
+import {connect} from 'react-redux';
+
+const mapStateToProps = function (state) {
+  return {
+    user: state.authReducer,
+  };
+};
+
+class HomeScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -28,6 +36,8 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

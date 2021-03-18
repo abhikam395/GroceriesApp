@@ -8,10 +8,22 @@ import {
   View,
 } from 'react-native';
 
+import {connect} from 'react-redux';
+
 import {PRIMARY} from './../assets/commoncolors';
 import ProductComponent from './ProductComponent';
+import {getExclusiveOffers} from './../../apis/productsApis';
+import store from './../../store';
+import {addExclusiveOffers} from './../../store/actions/productActions';
 
-export default class ExclusiveOffers extends Component {
+const mapPropsToState = function (state) {
+  console.log(state);
+  return {
+    products: state.offersProductReducer.products,
+  };
+};
+
+class ExclusiveOffers extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,6 +34,18 @@ export default class ExclusiveOffers extends Component {
         {id: '4', name: 'Ginger', quantity: '7pcs', price: '$4.55'},
       ],
     };
+  }
+
+  async componentDidMount() {
+    try {
+      const response = getExclusiveOffers();
+      const object = (await response).data;
+      if (object.products.length) {
+        store.dispatch(addExclusiveOffers(object.products));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   renderProduct(product) {
@@ -53,6 +77,8 @@ export default class ExclusiveOffers extends Component {
     );
   }
 }
+
+export default connect(mapPropsToState)(ExclusiveOffers);
 
 const styles = StyleSheet.create({
   row: {

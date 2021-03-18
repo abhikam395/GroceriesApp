@@ -20,6 +20,8 @@ target 'GroceriesApp' do
 
   pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'
 
+  pod 'RNDefaultPreference', :path => '../node_modules/react-native-default-preference'
+
   target 'GroceriesAppTests' do
     inherit! :complete
     # Pods for testing

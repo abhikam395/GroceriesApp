@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.kevinresol.react_native_default_preference.RNDefaultPreferencePackage;
 import com.reactnativepagerview.PagerViewPackage;
 import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;

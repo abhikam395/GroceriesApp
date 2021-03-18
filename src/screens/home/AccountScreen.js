@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {PRIMARY, WHITE} from '../../assets/commoncolors';
-import {StackActions} from '@react-navigation/native';
+import store from './../../../store';
+import {clear} from './../../../store/actions/authAction';
 
 import AccountItemComponent from './../../components/AccountItemComponent';
 
@@ -26,6 +27,9 @@ export default class AccountScreen extends Component {
       index: 0,
       routes: [{name: 'Login'}],
     });
+
+    //clear user info from permanent storage
+    store.dispatch(clear());
   }
 
   editImage() {

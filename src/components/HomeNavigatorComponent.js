@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 export default function HomeNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Explore"
+      initialRouteName="Shop"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
           let Icon;
