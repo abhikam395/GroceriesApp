@@ -8,66 +8,48 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import {connect} from 'react-redux';
+import store from './../../../store';
+import {add, remove} from './../../../store/actions/cartActions';
+
 import {PRIMARY, WHITE} from '../../assets/commoncolors';
-import { ACTIONS } from '../../utils/cartActions';
+import {ACTIONS} from '../../utils/cartActions';
 import OrderAcceptScreen from '../OrderAcceptScreen';
 import CartItemComponent from './../../components/CartItemComponent';
 
+import {
+  getCartsItems,
+  addToCart,
+  removeItemCart,
+} from './../../../apis/cartApis';
+
 import CheckoutScreen from './../CheckOutScreen';
 
-export default class CartScreen extends Component {
+const mapPropsToState = function (state) {
+  return {
+    products: state.cartReducer.products,
+  };
+};
+
+class CartScreen extends Component {
   constructor() {
     super();
     this.state = {
-      list: [
-        {
-          id: 1,
-          name: 'Bell Pepper Red',
-          label: '1kg, Price',
-          price: '4.2',
-          quantity: 1,
-        },
-        {
-          id: 2,
-          name: 'Bell Pepper Red',
-          label: '1kg, Price',
-          price: '4.2',
-          quantity: 1,
-        },
-        {
-          id: 3,
-          name: 'Bell Pepper Red',
-          label: '1kg, Price',
-          price: '4.2',
-          quantity: 1,
-        },
-        {
-          id: 4,
-          name: 'Bell Pepper Red',
-          label: '1kg, Price',
-          price: '4.2',
-          quantity: 1,
-        },
-        {
-          id: 5,
-          name: 'Bell Pepper Red',
-          label: '1kg, Price',
-          price: '4.2',
-          quantity: 1,
-        },
-        {
-          id: 6,
-          name: 'Bell Pepper Red',
-          label: '1kg, Price',
-          price: '4.2',
-          quantity: 1,
-        },
-        {id: 7, name: 'Ginger', label: '1kg, Price', price: '4.2', quantity: 1},
-      ],
       actionType: null,
+      list: [],
     };
     this.removeProduct = this.removeProduct.bind(this);
     this.changeAction = this.changeAction.bind(this);
+  }
+
+  async componentDidMount() {
+    try {
+      let response = await getCartsItems(1);
+      store.dispatch(add(response.data));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   removeProduct(id) {
@@ -132,6 +114,8 @@ export default class CartScreen extends Component {
     );
   }
 }
+
+export default connect(mapPropsToState)(CartScreen);
 
 const styles = StyleSheet.create({
   container: {

@@ -17,7 +17,6 @@ import store from './../../store';
 import {addExclusiveOffers} from './../../store/actions/productActions';
 
 const mapPropsToState = function (state) {
-  console.log(state);
   return {
     products: state.offersProductReducer.products,
   };
